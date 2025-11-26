@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>韓國之旅 - 行程規劃工具 (JS)</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>🇰🇷 韓國首爾五日遊</h1>
+      <p>行程管理 (使用 LocalStorage 儲存)</p>
+    </header>
+
+    <main>
+      <div class="add-section">
+        <h3>📝 新增/編輯行程</h3>
+        <input type="hidden" id="edit-id" />
+        <input
+          type="text"
+          id="trip-name"
+          placeholder="行程名稱 (例如: 午餐: 王妃家烤肉)"
+          required
+        />
+        <input
+          type="text"
+          id="trip-time"
+          placeholder="時間 (例如: 13:00 - 14:30)"
+        />
+        <input
+          type="number"
+          id="trip-cost"
+          placeholder="花費金額 (韓元 ₩)"
+          value="0"
+        />
+        <textarea id="trip-notes" placeholder="備註/建議/彈性說明"></textarea>
+        <select id="trip-type">
+          <option value="景點">景點</option>
+          <option value="餐飲">餐飲</option>
+          <option value="住宿">住宿</option>
+          <option value="購物">購物</option>
+          <option value="交通">交通</option>
+        </select>
+        <button id="submit-btn" class="submit-btn">新增行程</button>
+      </div>
+
+      <section class="day-plan">
+        <div class="day-header">
+          <h3>📅 Day 1 行程列表</h3>
+          <p id="total-cost">總花費: ₩ 0</p>
+        </div>
+        <div id="trip-list" class="trip-list">
+          <p class="placeholder">目前沒有行程，請新增。</p>
+        </div>
+      </section>
+
+      <section class="map-link">
+        <h4>🗺️ 點選地圖功能</h4>
+        <p>點擊可連動 Google Map 顯示當日所有行程地點。</p>
+        <button class="google-map-btn">開啟 Google Map</button>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+body {
+  font-family: "微軟正黑體", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f9fc;
+  color: #333;
+  line-height: 1.6;
+  padding-bottom: 30px;
+}
+
+header {
+  background-color: #3b5998; /* 深藍色主題 */
+  color: white;
+  padding: 20px 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+}
+
+main {
+  padding: 20px 15px;
+}
+
+/* --- 新增/編輯區塊 --- */
+.add-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+
+.add-section h3 {
+  color: #3b5998;
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.add-section input,
+.add-section textarea,
+.add-section select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  background-color: #4caf50; /* 綠色按鈕 */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* --- 行程列表區塊 --- */
+.day-plan {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+#total-cost {
+  font-weight: bold;
+  color: #d32f2f; /* 紅色強調費用 */
+}
+
+/* 行程卡片 */
+.trip-card {
+  display: flex;
+  align-items: center;
+  background-color: #fcfcfc;
+  border-left: 5px solid #3b5998; /* 藍色側邊條 */
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.trip-card-content {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.trip-card .order {
+  font-size: 24px;
+  font-weight: bold;
+  color: #bbb;
+  margin-right: 10px;
+}
+
+.trip-card h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.trip-card p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.trip-card .time-cost {
+  font-weight: bold;
+  color: #00796b; /* 深綠色強調時間/費用 */
+}
+
+.trip-card-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 16px;
+}
+
+.edit-btn {
+  color: #ffc107;
+} /* 黃色編輯 */
+.delete-btn {
+  color: #f44336;
+} /* 紅色刪除 */
+
+/* 佔位符 */
+.placeholder {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+/* 地圖區塊 */
+.map-link {
+  background-color: #e0f7fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.google-map-btn {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
