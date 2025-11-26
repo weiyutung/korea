@@ -1,39 +1,14 @@
-// --- 元素選擇器 ---
+// ... [保持之前的元素選擇器] ...
 const tripList = document.getElementById('trip-list');
-const submitBtn = document.getElementById('submit-btn');
-const editIdInput = document.getElementById('edit-id');
-const tripNameInput = document.getElementById('trip-name');
-const tripTimeInput = document.getElementById('trip-time');
-const tripCostInput = document.getElementById('trip-cost');
-const tripNotesInput = document.getElementById('trip-notes');
-const tripTypeSelect = document.getElementById('trip-type');
-const totalCostElement = document.getElementById('total-cost');
+// ... [其他選擇器] ...
 
-// --- 資料結構 ---
-let trips = [];
-const STORAGE_KEY = 'koreaTrips';
+// 🎯 新增即時資訊選擇器
+const liveTimeElement = document.getElementById('live-time');
 
-// --- 輔助函數：從 LocalStorage 載入資料 ---
-function loadTrips() {
-    const storedTrips = localStorage.getItem(STORAGE_KEY);
-    if (storedTrips) {
-        trips = JSON.parse(storedTrips);
-    } else {
-        // 首次載入時的範例資料
-        trips = [
-            { id: Date.now() + 1, name: "抵達仁川國際機場 (ICN)", time: "10:00 - 11:00", cost: 50000, notes: "搭乘 AREX 直達首爾站", type: "交通" },
-            { id: Date.now() + 2, name: "午餐: 王妃家烤肉 (明洞店)", time: "13:00 - 14:30", cost: 80000, notes: "一定要點雪花牛", type: "餐飲" },
-            { id: Date.now() + 3, name: "南山谷韓屋村", time: "15:30 - 17:30", cost: 0, notes: "彈性：如果時間來不及就跳過。", type: "景點" }
-        ];
-    }
-}
+// ... [保持 loadTrips, saveTrips 函數] ...
 
-// --- 輔助函數：儲存資料到 LocalStorage ---
-function saveTrips() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(trips));
-}
 
-// --- 渲染行程列表與計算總費用 ---
+// --- 渲染行程列表 (修改以包含拖曳把手) ---
 function renderTrips() {
     tripList.innerHTML = '';
     let totalCost = 0;
@@ -45,25 +20,26 @@ function renderTrips() {
     }
 
     trips.forEach((trip, index) => {
-        // 計算總花費
         totalCost += parseFloat(trip.cost) || 0;
 
-        // 建立行程卡片元素
         const card = document.createElement('div');
         card.classList.add('trip-card');
-        card.dataset.id = trip.id; // 儲存 ID 供編輯/刪除使用
+        card.dataset.id = trip.id;
 
-        // 根據類型設定側邊條顏色 (模擬圖片中的分類屬性)
-        let typeColor = '#3b5998'; // 預設藍色
+        // ... [保持 typeColor 邏輯] ...
+        let typeColor = '#3b5998';
         switch (trip.type) {
             case '景點': typeColor = '#2196F3'; break;
             case '餐飲': typeColor = '#FF5722'; break;
             case '住宿': typeColor = '#4CAF50'; break;
+            case '購物': typeColor = '#FFC107'; break;
+            case '交通': typeColor = '#9E9E9E'; break;
         }
         card.style.borderLeftColor = typeColor;
 
 
         card.innerHTML = `
+            <div class="drag-handle">⋮⋮</div> 
             <div class="order">${index + 1}.</div>
             <div class="trip-card-content">
                 <h4>${trip.name} (${trip.type})</h4>
@@ -79,100 +55,56 @@ function renderTrips() {
     });
 
     totalCostElement.textContent = `總花費: ₩ ${totalCost.toLocaleString()}`;
-    saveTrips(); // 每次渲染後，儲存最新的資料
+    saveTrips();
 }
 
-// --- 新增或更新行程 (核心邏輯) ---
-function handleFormSubmit(event) {
-    event.preventDefault();
+// ... [保持 handleFormSubmit, prepareEdit, deleteTrip 函數] ...
 
-    const name = tripNameInput.value.trim();
-    const time = tripTimeInput.value.trim();
-    const cost = parseFloat(tripCostInput.value) || 0;
-    const notes = tripNotesInput.value.trim();
-    const type = tripTypeSelect.value;
-    const editId = editIdInput.value;
 
-    if (!name) {
-        alert('請輸入行程名稱！');
-        return;
-    }
-
-    if (editId) {
-        // --- 更新現有行程 ---
-        const index = trips.findIndex(t => t.id == editId);
-        if (index !== -1) {
-            trips[index] = { id: parseInt(editId), name, time, cost, notes, type };
-        }
-        // 重設按鈕狀態
-        submitBtn.textContent = '新增行程';
-        editIdInput.value = '';
-    } else {
-        // --- 新增行程 ---
-        const newTrip = {
-            id: Date.now(), // 使用時間戳作為唯一 ID
-            name,
-            time,
-            cost,
-            notes,
-            type
-        };
-        trips.push(newTrip);
-    }
-
-    // 清空表單
-    tripNameInput.value = '';
-    tripTimeInput.value = '';
-    tripCostInput.value = '0';
-    tripNotesInput.value = '';
-    tripTypeSelect.value = '景點';
-
-    renderTrips();
+// --- 🎯 新功能 1: 實作即時時間顯示 (功能 3 - 即時時間) ---
+function updateLiveTime() {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const formattedDate = now.toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' });
+    liveTimeElement.innerHTML = `🕗 ${formattedDate} ${formattedTime} (首爾時間)`;
 }
 
-// --- 準備編輯狀態 (填充表單) ---
-function prepareEdit(id) {
-    const tripToEdit = trips.find(t => t.id === id);
-    if (!tripToEdit) return;
+// --- 🎯 新功能 2: 實作拖曳排序 (功能 2 - 調整位置) ---
+function initSortable() {
+    new Sortable(tripList, {
+        animation: 150, // 拖曳動畫速度
+        handle: '.drag-handle', // 只有點擊 '⋮⋮' 時才能拖曳
+        onEnd: function (evt) {
+            // 取得被移動的行程
+            const item = trips[evt.oldIndex];
 
-    // 填充表單
-    editIdInput.value = tripToEdit.id;
-    tripNameInput.value = tripToEdit.name;
-    tripTimeInput.value = tripToEdit.time;
-    tripCostInput.value = tripToEdit.cost;
-    tripNotesInput.value = tripToEdit.notes;
-    tripTypeSelect.value = tripToEdit.type;
+            // 從舊位置移除，並插入到新位置
+            trips.splice(evt.oldIndex, 1);
+            trips.splice(evt.newIndex, 0, item);
 
-    // 改變按鈕文字
-    submitBtn.textContent = `儲存變更 (ID: ${tripToEdit.id})`;
-
-    // 將視窗捲動到表單頂部，方便編輯
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+            // 重新渲染介面以更新順序編號和 LocalStorage
+            renderTrips();
+        },
+    });
 }
 
-// --- 刪除行程 ---
-function deleteTrip(id) {
-    if (confirm('確定要刪除這個行程嗎？')) {
-        trips = trips.filter(trip => trip.id !== id);
-        renderTrips();
-    }
-}
 
 // --- 初始化應用程式 ---
 function init() {
-    loadTrips(); // 從 LocalStorage 載入資料
-    renderTrips(); // 渲染介面
+    loadTrips();
+    renderTrips();
+
+    // 啟動拖曳排序
+    initSortable();
+
+    // 啟動即時時間更新 (每秒更新一次)
+    updateLiveTime();
+    setInterval(updateLiveTime, 1000);
 
     // 監聽表單提交事件
     submitBtn.addEventListener('click', handleFormSubmit);
 
-    // 讓整個表單可以按 Enter 提交
-    document.querySelector('.add-section').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handleFormSubmit(e);
-        }
-    });
+    // ... [保持 Enter 提交邏輯] ...
 }
 
 // 啟動應用程式

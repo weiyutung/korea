@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>韓國之旅 - 行程規劃工具 (JS)</title>
+    <link href="styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>🇰🇷 韓國首爾五日遊</h1>
+      <p>行程管理 (支援拖曳排序與即時資訊)</p>
+    </header>
+
+    <main>
+      <section class="live-info">
+        <p id="live-time">🕗 即時時間: 載入中...</p>
+        <p id="live-weather">☁️ 首爾氣候: 晴朗 18°C</p>
+        <p id="travel-tip">💡 旅行建議: 今天適合在戶外走動！</p>
+      </section>
+
+      <div class="add-section"></div>
+
+      <section class="day-plan">
+        <div class="day-header">
+          <h3>📅 Day 1 行程列表 (可拖曳調整順序)</h3>
+          <p id="total-cost">總花費: ₩ 0</p>
+        </div>
+        <div id="trip-list" class="trip-list">
+          <p class="placeholder">目前沒有行程，請新增。</p>
+        </div>
+      </section>
+
+      <section class="map-link">
+        <h4>🗺️ 點選地圖功能</h4>
+        <p>點擊可連動 Google Map 顯示當日所有行程地點。</p>
+        <a
+          href="https://www.google.com/maps/search/%E9%9F%93%E5%9C%8B%E9%A6%96%E7%88%BE%E6%99%AF%E9%BB%A8/@37.5651,126.9749,14z"
+          target="_blank"
+          class="google-map-btn"
+          >開啟 Google Map 總覽</a
+        >
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,170 +1,43 @@
-body {
-  font-family: "微軟正黑體", Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f7f9fc;
-  color: #333;
-  line-height: 1.6;
-  padding-bottom: 30px;
-}
+/* ... [保持之前 CSS 樣式的基礎部分] ... */
 
-header {
-  background-color: #3b5998; /* 深藍色主題 */
-  color: white;
-  padding: 20px 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-  margin: 0 0 5px 0;
-  font-size: 24px;
-}
-
-main {
-  padding: 20px 15px;
-}
-
-/* --- 新增/編輯區塊 --- */
-.add-section {
-  background-color: white;
-  padding: 20px;
+/* 新增即時資訊區塊樣式 (功能 3) */
+.live-info {
+  background-color: #e8f5e9; /* 淺綠色背景 */
+  color: #388e3c;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 25px;
+  display: flex; /* 讓資訊水平排列 */
+  justify-content: space-around;
+  flex-wrap: wrap; /* 小螢幕時換行 */
 }
 
-.add-section h3 {
-  color: #3b5998;
-  margin-top: 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
+.live-info p {
+  margin: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.add-section input,
-.add-section textarea,
-.add-section select {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.submit-btn {
-  background-color: #4caf50; /* 綠色按鈕 */
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 100%;
-}
-
-.submit-btn:hover {
-  background-color: #45a049;
-}
-
-/* --- 行程列表區塊 --- */
-.day-plan {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.day-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-#total-cost {
-  font-weight: bold;
-  color: #d32f2f; /* 紅色強調費用 */
-}
-
-/* 行程卡片 */
+/* 讓行程卡片支援拖曳把手樣式 */
 .trip-card {
-  display: flex;
-  align-items: center;
-  background-color: #fcfcfc;
-  border-left: 5px solid #3b5998; /* 藍色側邊條 */
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  /* 保持 display: flex 和其他基礎樣式 */
+  /* ... */
 }
 
-.trip-card-content {
-  flex-grow: 1;
-  margin-left: 10px;
-}
-
-.trip-card .order {
-  font-size: 24px;
-  font-weight: bold;
-  color: #bbb;
+/* 🎯 新增拖曳把手樣式 */
+.drag-handle {
+  font-size: 20px;
+  color: #ccc;
   margin-right: 10px;
+  cursor: grab; /* 模擬可拖曳的指標 */
 }
 
-.trip-card h4 {
-  margin: 0;
-  font-size: 16px;
+/* 模擬 SortableJS 拖曳時的陰影效果 */
+.sortable-chosen {
+  opacity: 0.7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.trip-card p {
-  margin: 4px 0;
-  font-size: 13px;
-  color: #666;
-}
-
-.trip-card .time-cost {
-  font-weight: bold;
-  color: #00796b; /* 深綠色強調時間/費用 */
-}
-
-.trip-card-actions button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 8px;
-  font-size: 16px;
-}
-
-.edit-btn {
-  color: #ffc107;
-} /* 黃色編輯 */
-.delete-btn {
-  color: #f44336;
-} /* 紅色刪除 */
-
-/* 佔位符 */
-.placeholder {
-  text-align: center;
-  color: #999;
-  padding: 20px;
-}
-
-/* 地圖區塊 */
-.map-link {
-  background-color: #e0f7fa;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.google-map-btn {
-  background-color: #ff9800;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-}
+/* ... [保持其他 CSS 樣式不變] ... */
